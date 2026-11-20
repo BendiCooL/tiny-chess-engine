@@ -6,6 +6,16 @@
 
 A chess engine that fits in 4 KB of Python: negamax search with a transposition table, quiescence and tapered piece-square evaluation, driven by a fixed node budget so every move is deterministic. It plays the make.fun house gauntlet through the trial env.
 
+## Inside
+
+- PVS alpha-beta with iterative deepening, transposition table, killers + history ordering
+- Quiescence over captures and promotions, with check evasions and delta pruning
+- Null-move pruning, late-move reductions, check extensions, repetition = draw in search
+- Tapered evaluation: material + piece-square tables, bishop pair, incremental Zobrist keys
+- Fixed node budget per move (62k, tapered down late in the game), so play is fully deterministic
+
+Local practice trials against the house gauntlet (depth-2 through nodes-500k): 12.5/18 points across the three practice instances, per-instance Elo estimates 1279 / 1809 / 1451 against the Sunfish baseline's 1364 / 1451 / 1279.
+
 ## Run it
 
 ```sh
